@@ -2,8 +2,8 @@
  # default = "us-east-1"
 #}
 
-variable "tf_backend_bucket_name" {
-  default = "sagar-gitops-terraform-state"
+variable "tf_frontend_bucket" {
+  default = "sagar-frontend"
 }
 
 #variable "devops_interns_repo_name" {
