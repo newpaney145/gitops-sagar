@@ -50,8 +50,33 @@ resource "aws_dynamodb_table" "tf_backend_bucket_state_lock" {
     "Name" = "DynamoDB Terraform State Lock Table"
   }
 }
+resource "aws_s3_bucket" "frontend" {
+  bucket = "your-frontend-app-bucket-name"
+  acl    = "public-read"
 
-resource "aws_codecommit_repository" "gitops_demo_repo" {
-  repository_name = var.devops_interns_repo_name
-  description     = "Created for \"GitOps with Terraform\" session"
+  website {
+    index_document = "index.html"
+    error_document = "error.html"
+  }
+
+  tags = {
+    Name        = "FrontendApp"
+    Environment = "production"
+  }
+}
+
+resource "aws_s3_bucket_policy" "frontend_policy" {
+  bucket = aws_s3_bucket.frontend.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Action    = "s3:GetObject"
+        Effect    = "Allow"
+        Resource  = "${aws_s3_bucket.frontend.arn}/*"
+        Principal = "*"
+      },
+    ]
+  })
 }
