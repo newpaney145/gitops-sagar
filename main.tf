@@ -14,7 +14,7 @@ terraform {
 
 
 resource "aws_s3_bucket" "intern-s3-bucket" {
-  bucket = var.frontend_bucket_name
+  bucket = var.tf_frontend_bucket
   tags = {
       "Name" = "sagar-bucket",
       "Creator" = "sagarnewpaney144@gmail.com",
