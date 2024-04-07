@@ -51,7 +51,7 @@ resource "aws_dynamodb_table" "tf_backend_bucket_state_lock" {
   }
 }
 resource "aws_s3_bucket" "frontend" {
-  bucket = "your-frontend-app-bucket-name"
+  bucket = "sagar-terraform-frontend"
   acl    = "public-read"
 
   website {
@@ -61,7 +61,9 @@ resource "aws_s3_bucket" "frontend" {
 
   tags = {
     Name        = "FrontendApp"
-    Environment = "production"
+    Project     = "Intern"
+    Deletable   = "yes"
+    Creator     = "sagarnewpaney144@gmail.com"
   }
 }
 
