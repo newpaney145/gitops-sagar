@@ -7,7 +7,7 @@ terraform {
     bucket         = "sagar-gitops-terraform-state"
     key            = "terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "terraform_state"
+    dynamodb_table = "sagar_dynamodb"
   }
 }
 
@@ -38,7 +38,7 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "tf_backend_bucket
 }
 
 resource "aws_dynamodb_table" "tf_backend_bucket_state_lock" {
-  name           = "terraform_state"
+  name           = "sagar_dynamodb"
   read_capacity  = 1
   write_capacity = 1
   hash_key       = "LockID"
