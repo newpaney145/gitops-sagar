@@ -2,8 +2,8 @@ name: Detect and Reconcile Drift
 
 on:
   schedule:
-    - cron: '*/5 * * * *' # Runs at 00:00 UTC every day
-  workflow_dispatch: # This enables manual triggering of the workflow
+    - cron: '0 0 * * *' # Runs at 00:00 UTC every day
+  workflow_dispatch:
 
 jobs:
   detect-and-reconcile:
@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Setup AWS CLI
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -32,5 +32,4 @@ jobs:
         run: terraform plan -no-color
 
       - name: Terraform Apply
-        if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         run: terraform apply -auto-approve -no-color
