@@ -3,7 +3,7 @@
 #}
 
 variable "tf_frontend_bucket" {
-  default = "sagar-frontend"
+  default = "sagar-frontend-1"
 }
 
 #variable "devops_interns_repo_name" {
