@@ -1,3 +1,10 @@
+name: Detect and Reconcile Drift
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs at 00:00 UTC every day
+  workflow_dispatch: # This enables manual triggering of the workflow
+
 jobs:
   detect-and-reconcile:
     runs-on: ubuntu-latest
@@ -27,4 +34,3 @@ jobs:
       - name: Terraform Apply
         if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
         run: terraform apply -auto-approve -no-color
-
