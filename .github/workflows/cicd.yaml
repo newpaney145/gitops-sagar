@@ -1,35 +1,35 @@
-name: Detect and Reconcile Drift
+# name: Detect and Reconcile Drift
 
-on:
-  schedule:
-    - cron: '*/5 * * * *' # Runs at 00:00 UTC every day
-  workflow_dispatch:
+# on:
+#   schedule:
+#     - cron: '*/5 * * * *' # Runs at 00:00 UTC every day
+#   workflow_dispatch:
 
-jobs:
-  detect-and-reconcile:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+# jobs:
+#   detect-and-reconcile:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
 
-      - name: Setup AWS CLI
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: us-east-1
+#       - name: Setup AWS CLI
+#         uses: aws-actions/configure-aws-credentials@v1
+#         with:
+#           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+#           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+#           aws-region: us-east-1
 
-      - name: Setup Terraform
-        uses: hashicorp/setup-terraform@v1
-        with:
-          terraform_version: '1.5.0'
+#       - name: Setup Terraform
+#         uses: hashicorp/setup-terraform@v1
+#         with:
+#           terraform_version: '1.5.0'
 
-      - name: Terraform Init
-        run: terraform init
+#       - name: Terraform Init
+#         run: terraform init
 
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan -no-color
+#       - name: Terraform Plan
+#         id: plan
+#         run: terraform plan -no-color
 
-      - name: Terraform Apply
-        run: terraform apply -auto-approve -no-color
+#       - name: Terraform Apply
+#         run: terraform apply -auto-approve -no-color
